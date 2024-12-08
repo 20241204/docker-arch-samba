@@ -38,14 +38,20 @@
     配置文件 docker-compose.yml 这个可以自己按照需求修改  
     整个项目不难，看看配置文件，看看脚本，再看看目录结构，肯定就理解了  
 
-    .                                            # 根目录  
+    .                                     # 这个是根目录
+    ├── .github                           # 这个是github虚拟机项目
+    │   └── workflows                     # 这个是工作流文件夹
+    │       ├── actions.yml               # 这个是docker构建编译流文件
+    │       ├── clean-git-large-files.yml # 这个是清理 .git 大文件流文件
+    │       └── remove-old-workflow.yml   # 这个是移除缓存流文件  
     ├── docker-compose-amd64.yml                 # 这个是 docker-compose-amd64.yml 配置文件
     ├── docker-compose-arm64.yml                 # 这个是 docker-compose-arm64.yml 配置文件   
     ├── Dockerfile                               # 这个是 docker 构建文件  
-    └── package                                  # 这个是脚本、配置文件所在目录  
-        ├── install.sh                           # 这个是构建镜像的时候在容器内执行流程的脚本   
+    └── package                                  # 这个是脚本、配置文件所在目录 
+        ├── init.sh                              # 这个是构建镜像的时候在容器内执行初始化流程的脚本   
+        ├── install.sh                           # 这个是构建镜像的时候在容器内执行部署流程的脚本   
         ├── run_samba                            # 这个是启动 samba 的脚本  
-        └── samba.bak                            # 这个是 samba 默认配置目录，也可以按照需求配置  
+        └── samba                                # 这个是 samba 默认配置目录，也可以按照需求配置  
             ├── smb.conf                         # 这个是 samba 默认配置文件 默认用户名 root 
             └── smbpasswd                        # 这个是 samba 默认密码文件 默认密码 123456   
 
