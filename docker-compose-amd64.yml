@@ -1,0 +1,36 @@
+services:
+  alpine-samba-app:
+    build:
+      context: .
+    command:
+      - bash
+      - run_samba
+    platform: linux/amd64
+    container_name: alpine-samba-amd64-container
+    environment:
+      - USERS=root
+      - PASSWORD=123456
+      #- http_proxy=http://IP:PORT
+      #- https_proxy=http://IP:PORT
+      #- all_proxy=socks5://IP:PORT
+    image: ghcr.io/20241204/docker-arch-samba:latest
+    #network_mode: bridge
+    networks:
+      - app-net
+    ports:
+      - "139:139"
+      - "445:445"
+    privileged: true
+    restart: "always"
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+    volumes:
+      - ./sharedir/samba/conf:/etc/samba
+      - ./sharedir:/sharedir
+networks:
+  app-net:
+    #driver: host
+    driver: bridge
+    #external: true
