@@ -23,7 +23,8 @@ fi
 
 # 判断用户是否自定义了密码文件？
 if [ ! -f /etc/samba/smbpasswd ]; then
-    adduser -G root "${USERS}"
+    addgroup -S $USERS
+    adduser -G "${USERS}" "${USERS}"
     echo "$USERS ALL=(ALL) ALL" > /etc/sudoers.d/$USERS && chmod 0440 /etc/sudoers.d/$USERS
     usermod -aG $(id -G $USER | sed 's; ;,;g') ${USERS}
     id ${USERS}
